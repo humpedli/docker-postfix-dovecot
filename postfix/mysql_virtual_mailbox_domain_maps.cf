@@ -1,7 +1,6 @@
 user = mail
 password = mail
 hosts = localhost
-port = 3306
 dbname = mail
 
 query = SELECT maildir FROM mailbox,alias_domain

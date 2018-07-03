@@ -1,10 +1,9 @@
 user = mail
 password = mail
 hosts = localhost
-port = 3306
 dbname = mail
 
 table = domain
 select_field = domain
 where_field = domain
-dditional_conditions = and backupmx = '0' and active = '1'
+additional_conditions = and backupmx = '0' and active = '1'

@@ -14,7 +14,7 @@ docker run --name=postfix-dovecot \
   --restart=always \
   -v <path_to_cert/cert.pem>:/etc/ssl/certs/fullchain.pem:ro \
   -v <path_to_key/key.pem>:/etc/ssl/private/privkey.pem:ro \
-  -v <path_to_mails>:/var/vmail/ \
+  -v <path_to_mails>:/var/vmail \
   -v /etc/localtime:/etc/localtime:ro \
   --link mysql:mysql \
   -e HOSTNAME=example.com \
@@ -46,7 +46,7 @@ services:
     volumes:
       - "<path_to_cert/cert.pem>:/etc/ssl/certs/fullchain.pem:ro"
       - "<path_to_key/key.pem>:/etc/ssl/private/privkey.pem:ro"
-      - "<path_to_mails>:/var/vmail/"
+      - "<path_to_mails>:/var/vmail"
       - "/etc/localtime:/etc/localtime:ro"
     environment:
       - "HOSTNAME=example.com"
