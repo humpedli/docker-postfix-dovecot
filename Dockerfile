@@ -6,6 +6,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update 
 RUN apt-get install -y wget \
                        postfix-mysql \
+                       postfix-policyd-spf-python \
                        dovecot-mysql \
                        dovecot-imapd \
                        dovecot-lmtpd \
