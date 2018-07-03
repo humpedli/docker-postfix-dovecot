@@ -1,0 +1,10 @@
+user = mail
+password = mail
+hosts = localhost
+port = 3306
+dbname = mail
+
+table = alias
+select_field = goto
+where_field = address
+additional_conditions = and active = '1'
