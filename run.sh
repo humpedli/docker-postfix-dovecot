@@ -15,6 +15,6 @@ sed -i "s/postmaster_address =.*/postmaster_address = ${POSTMASTER:-postmaster@e
 
 # start services
 /etc/init.d/postfix start
-/etc/init.d/rsyslog start
+/etc/init.d/rsyslog restart
 /etc/init.d/spamassassin start
 /usr/sbin/dovecot -F
