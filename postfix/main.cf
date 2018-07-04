@@ -101,11 +101,6 @@ smtpd_recipient_restrictions =
   check_policy_service unix:private/spf,
   permit
 
-smtpd_relay_restrictions = 
-  permit_mynetworks,
-  permit_sasl_authenticated,
-  reject
-
 submission_client_restrictions =
   permit_mynetworks,
   permit_sasl_authenticated,
