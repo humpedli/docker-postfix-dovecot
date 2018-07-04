@@ -14,7 +14,7 @@ docker run --name=postfix-dovecot \
   --restart=always \
   -v <path_to_cert/cert.pem>:/etc/ssl/certs/fullchain.pem:ro \
   -v <path_to_key/key.pem>:/etc/ssl/private/privkey.pem:ro \
-  -v <path_to_mails>:/var/vmail \
+  -v <path_to_mails>:/home/vmail \
   -v /etc/localtime:/etc/localtime:ro \
   --link mysql:mysql \
   -e HOSTNAME=example.com \
@@ -25,7 +25,7 @@ docker run --name=postfix-dovecot \
   -e MYSQL_PASSWORD=<mysql_password> \
   -e MYSQL_DATABASE=<mysql_database> \
   -p 25:25 \
-  -p 465:465 \
+  -p 587:587 \
   -p 993:993 \
   -d humpedli/docker-postfix-dovecot
 ```
@@ -41,12 +41,12 @@ services:
     image: "humpedli/docker-postfix-dovecot"
     ports:
       - "25:25"
-      - "465:465"
+      - "587:587"
       - "993:993"
     volumes:
       - "<path_to_cert/cert.pem>:/etc/ssl/certs/fullchain.pem:ro"
       - "<path_to_key/key.pem>:/etc/ssl/private/privkey.pem:ro"
-      - "<path_to_mails>:/var/vmail"
+      - "<path_to_mails>:/home/vmail"
       - "/etc/localtime:/etc/localtime:ro"
     environment:
       - "HOSTNAME=example.com"
