@@ -1,6 +1,7 @@
 # ---------------------------------
 # General parameters
 # ---------------------------------
+compatibility_level = 2
 myhostname = localhost
 myorigin = localhost
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
@@ -16,7 +17,6 @@ biff = no
 append_dot_mydomain = no
 readme_directory = no
 enable_original_recipient = no
-spf_time_limit = 3600
 smtpd_milters = inet:dkim-engine:14335
 non_smtpd_milters = inet:dkim-engine:14335
 
@@ -28,7 +28,6 @@ smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/auth
 smtpd_sasl_auth_enable = yes
 smtpd_tls_auth_only = yes
-smtpd_upstream_proxy_protocol = haproxy
 smtpd_tls_security_level = may
 smtp_tls_security_level = may
 smtpd_tls_cert_file = /etc/ssl/certs/fullchain.pem
