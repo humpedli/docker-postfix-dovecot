@@ -4,7 +4,7 @@
 compatibility_level = 2
 myhostname = localhost
 myorigin = localhost
-mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
+mynetworks = 127.0.0.0/8 172.18.0.0/16 [::ffff:127.0.0.0]/104 [::1]/128
 mydestination = localhost
 relayhost = 
 mailbox_size_limit = 0
@@ -58,12 +58,14 @@ smtp_helo_timeout = 60s
 # ---------------------------------
 
 smtpd_helo_restrictions = 
+  permit_mynetworks,
   permit_sasl_authenticated,
   reject_non_fqdn_helo_hostname, 
   reject_invalid_helo_hostname, 
   permit
 
 smtpd_sender_restrictions = 
+  permit_mynetworks,
   permit_sasl_authenticated, 
   reject_unauth_pipelining, 
   reject_non_fqdn_sender, 
@@ -71,6 +73,7 @@ smtpd_sender_restrictions =
   permit
 
 smtpd_recipient_restrictions = 
+  permit_mynetworks,
   permit_sasl_authenticated,
   permit_dnswl_client list.dnswl.org,
   reject_unauth_destination,
@@ -99,15 +102,18 @@ smtpd_recipient_restrictions =
   permit
 
 smtpd_relay_restrictions = 
+  permit_mynetworks,
   permit_sasl_authenticated,
   reject
 
 submission_client_restrictions =
+  permit_mynetworks,
   permit_sasl_authenticated,
   reject
 
 submission_sender_restrictions =
   reject_sender_login_mismatch,
+  permit_mynetworks,
   permit_sasl_authenticated,
   reject
 
@@ -115,6 +121,7 @@ submission_recipient_restrictions =
   reject_unauth_pipelining,
   reject_non_fqdn_recipient,
   reject_unknown_recipient_domain,
+  permit_mynetworks,
   permit_sasl_authenticated,
   reject
 
