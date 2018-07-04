@@ -4,7 +4,8 @@
 compatibility_level = 2
 myhostname = localhost
 myorigin = localhost
-mynetworks = 127.0.0.0/8 172.18.0.0/16 [::ffff:127.0.0.0]/104 [::1]/128
+mycustomnetworks = 
+mynetworks = 127.0.0.0/8 $mycustomnetworks [::ffff:127.0.0.0]/104 [::1]/128
 mydestination = localhost
 relayhost = 
 mailbox_size_limit = 0

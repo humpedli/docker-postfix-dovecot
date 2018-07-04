@@ -18,6 +18,7 @@ docker run --name=postfix-dovecot \
   -v /etc/localtime:/etc/localtime:ro \
   --link mysql:mysql \
   -e HOSTNAME=example.com \
+  -e CUSTOM_NETWORKS='172.18.0.0/16' \
   -e POSTMASTER=postmaster@example.com \
   -e MYSQL_HOST=mysql \
   -e MYSQL_PORT=3306 \
@@ -50,6 +51,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
     environment:
       - "HOSTNAME=example.com"
+      - "CUSTOM_NETWORKS='172.18.0.0/16'"
       - "POSTMASTER=postmaster@example.com"
       - "MYSQL_HOST=mysql"
       - "MYSQL_PORT=3306"
