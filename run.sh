@@ -14,7 +14,11 @@ sed -i "s/connect =.*/connect = host=${MYSQL_HOST:-localhost} dbname=${MYSQL_DAT
 sed -i "s/postmaster_address =.*/postmaster_address = ${POSTMASTER:-postmaster@example.com}/g" /etc/dovecot/dovecot.conf
 
 # start services
-/etc/init.d/postfix start
-/etc/init.d/rsyslog restart
-/etc/init.d/spamassassin start
-/usr/sbin/dovecot -F
+service syslog-ng start
+        dovecot
+        postfix start
+        spamd &
+
+chmod 777 /var/spool/postfix/maildrop/
+
+tail -f /var/log/mail.log

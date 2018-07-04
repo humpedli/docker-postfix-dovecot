@@ -11,12 +11,14 @@ recipient_delimiter = +
 inet_interfaces = all
 inet_protocols = all
 mynetworks_style = host
-smtpd_banner = $myhostname ESMTP $mail_name (Ubuntu)
+smtpd_banner = $myhostname ESMTP (Ubuntu)
 biff = no
 append_dot_mydomain = no
 readme_directory = no
 enable_original_recipient = no
 spf_time_limit = 3600
+smtpd_milters = inet:dkim-engine:14335
+non_smtpd_milters = inet:dkim-engine:14335
 
 # ---------------------------------
 # SASL parameters
@@ -25,25 +27,16 @@ spf_time_limit = 3600
 smtpd_sasl_type = dovecot
 smtpd_sasl_path = private/auth
 smtpd_sasl_auth_enable = yes
-broken_sasl_auth_clients = yes
-smtpd_sasl_security_options = noanonymous
-smtpd_sasl_local_domain =
-smtpd_sasl_authenticated_header = yes
-
-# ---------------------------------
-# TLS parameters
-# ---------------------------------
-
+smtpd_tls_auth_only = yes
+smtpd_upstream_proxy_protocol = haproxy
+smtpd_tls_security_level = may
+smtp_tls_security_level = may
 smtpd_tls_cert_file = /etc/ssl/certs/fullchain.pem
 smtpd_tls_key_file = /etc/ssl/private/privkey.pem
-smtpd_tls_dh1024_param_file = /etc/ssl/private/dhparams.pem
-smtpd_tls_mandatory_protocols = !SSLv3
-smtpd_tls_loglevel = 1
-smtpd_tls_received_header = yes
+smtpd_tls_loglevel = 4
 smtpd_tls_session_cache_timeout = 3600s
-smtpd_tls_security_level = may
-smtpd_tls_exclude_ciphers = aNULL, eNULL, EXPORT, DES, RC4, MD5, PSK, aECDH, EDH-DSS-DES-CBC3-SHA, EDH-RSA-DES-CDC3-SHA, KRB5-DE5, CBC3-SHA
-smtp_tls_security_level = may
+smtpd_sasl_security_options=noanonymous
+smtpd_sasl_tls_security_options=noanonymous
 smtp_tls_note_starttls_offer = yes
 tls_random_source = dev:/dev/urandom
 
@@ -52,34 +45,33 @@ tls_random_source = dev:/dev/urandom
 # ---------------------------------
 
 delay_warning_time = 15m
-unknown_local_recipient_reject_code = 450
 maximal_queue_lifetime = 7d
 minimal_backoff_time = 1000s
 maximal_backoff_time = 8000s
 smtp_helo_timeout = 60s
 smtpd_recipient_limit = 30
-smtpd_soft_error_limit = 3
-smtpd_hard_error_limit = 12
+#smtpd_soft_error_limit = 3
+#smtpd_hard_error_limit = 12
 smtpd_delay_reject = yes
-disable_vrfy_command = yes
-smtpd_helo_required = yes
+#disable_vrfy_command = yes
+#smtpd_helo_required = yes
 
-smtpd_helo_restrictions = 
-  permit_mynetworks,
-  permit_sasl_authenticated,
-  warn_if_reject,
-  reject_non_fqdn_helo_hostname, 
-  reject_invalid_helo_hostname, 
-  permit
+#smtpd_helo_restrictions = 
+#  permit_mynetworks,
+#  permit_sasl_authenticated,
+#  warn_if_reject,
+#  reject_non_fqdn_helo_hostname, 
+#  reject_invalid_helo_hostname, 
+#  permit
 
-smtpd_sender_restrictions = 
-  permit_mynetworks,
-  permit_sasl_authenticated, 
-  warn_if_reject 
-  reject_non_fqdn_sender, 
-  reject_unknown_sender_domain, 
-  reject_unauth_pipelining, 
-  permit
+#smtpd_sender_restrictions = 
+#  permit_mynetworks,
+#  permit_sasl_authenticated, 
+#  warn_if_reject 
+#  reject_non_fqdn_sender, 
+#  reject_unknown_sender_domain, 
+#  reject_unauth_pipelining, 
+#  permit
 
 smtpd_recipient_restrictions = 
   reject_unauth_pipelining,
@@ -109,40 +101,38 @@ smtpd_recipient_restrictions =
   check_policy_service unix:private/spf,
   permit
 
-smtpd_relay_restrictions = 
-  reject_unauth_pipelining, 
-  permit_mynetworks, 
-  permit_sasl_authenticated, 
-  reject_non_fqdn_recipient, 
-  reject_unknown_recipient_domain, 
-  reject_unauth_destination, 
-  permit
+#smtpd_relay_restrictions = 
+#  reject_unauth_pipelining, 
+#  permit_mynetworks, 
+#  permit_sasl_authenticated, 
+#  reject_non_fqdn_recipient, 
+#  reject_unknown_recipient_domain, 
+#  reject_unauth_destination, 
+#  permit
 
-submission_client_restrictions =
-  permit_mynetworks,
-  permit_sasl_authenticated,
-  reject
+#submission_client_restrictions =
+#  permit_mynetworks,
+#  permit_sasl_authenticated,
+#  reject
 
-submission_sender_restrictions =
-  permit_mynetworks,
-  reject_sender_login_mismatch,
-  permit
+#submission_sender_restrictions =
+#  permit_mynetworks,
+#  reject_sender_login_mismatch,
+#  permit
 
-submission_recipient_restrictions =
-  reject_non_fqdn_recipient,
-  reject_unknown_recipient_domain,
-  permit_mynetworks,
-  permit_sasl_authenticated,
-  reject
+#submission_recipient_restrictions =
+#  reject_non_fqdn_recipient,
+#  reject_unknown_recipient_domain,
+#  permit_mynetworks,
+#  permit_sasl_authenticated,
+#  reject
 
 # ---------------------------------
 # Mailbox maps
 # ---------------------------------
 
 alias_maps = hash:/etc/aliases
-virtual_mailbox_base = /var/vmail
 virtual_mailbox_maps = mysql:/etc/postfix/mysql_virtual_mailbox_maps.cf, mysql:/etc/postfix/mysql_virtual_mailbox_domain_maps.cf
 virtual_mailbox_domains = mysql:/etc/postfix/mysql_virtual_domains_maps.cf
 virtual_alias_maps = mysql:/etc/postfix/mysql_virtual_alias_maps.cf, mysql:/etc/postfix/mysql_virtual_alias_domain_maps.cf
 virtual_transport = lmtp:unix:private/dovecot-lmtp
-dovecot_destination_recipient_limit = 1
