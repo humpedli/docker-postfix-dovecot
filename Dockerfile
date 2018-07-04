@@ -7,6 +7,7 @@ RUN apt-get update
 RUN apt-get install -y wget \
                        postfix-mysql \
                        postfix-policyd-spf-python \
+                       dovecot-core \
                        dovecot-mysql \
                        dovecot-imapd \
                        dovecot-lmtpd \
@@ -15,8 +16,8 @@ RUN apt-get install -y wget \
 
 # add vmail user and group
 RUN mkdir /var/vmail
-RUN groupadd -g 999 vmail
-RUN useradd -u 111 -g 999 -d /var/vmail -s /usr/sbin/nologin vmail
+RUN groupadd -g 5000 vmail
+RUN useradd -u 111 -g 5000 -d /var/vmail -s /usr/sbin/nologin vmail
 RUN chown -R vmail:vmail /var/vmail
 
 # cleanup

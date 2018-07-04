@@ -4,7 +4,7 @@
 myhostname = localhost
 myorigin = localhost
 mynetworks = 127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128
-mydestination =
+mydestination = localhost
 relayhost = 
 mailbox_size_limit = 0
 recipient_delimiter = +
@@ -138,7 +138,8 @@ submission_recipient_restrictions =
 # ---------------------------------
 # Mailbox maps
 # ---------------------------------
- 
+
+alias_maps = hash:/etc/aliases
 virtual_mailbox_base = /var/vmail
 virtual_mailbox_maps = mysql:/etc/postfix/mysql_virtual_mailbox_maps.cf, mysql:/etc/postfix/mysql_virtual_mailbox_domain_maps.cf
 virtual_mailbox_domains = mysql:/etc/postfix/mysql_virtual_domains_maps.cf
