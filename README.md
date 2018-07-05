@@ -51,7 +51,7 @@ services:
       - "/etc/localtime:/etc/localtime:ro"
     environment:
       - "HOSTNAME=example.com"
-      - "CUSTOM_NETWORKS='172.18.0.0/16'"
+      - "CUSTOM_NETWORKS=172.18.0.0/16"
       - "POSTMASTER=postmaster@example.com"
       - "MYSQL_HOST=mysql"
       - "MYSQL_PORT=3306"
