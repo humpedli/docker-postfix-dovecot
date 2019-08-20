@@ -54,6 +54,9 @@ smtpd_hard_error_limit = 12
 smtpd_delay_reject = yes
 smtpd_helo_required = yes
 smtp_helo_timeout = 60s
+smtp_destination_concurrency_limit = 2
+smtp_destination_rate_delay = 5s
+smtp_extra_recipient_limit = 10
 
 # ---------------------------------
 # Restrictions
