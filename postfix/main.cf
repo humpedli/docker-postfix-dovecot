@@ -50,13 +50,15 @@ maximal_backoff_time = 8000s
 disable_vrfy_command = yes
 smtpd_recipient_limit = 30
 smtpd_soft_error_limit = 3
-smtpd_hard_error_limit = 12
+smtpd_hard_error_limit = 5
 smtpd_delay_reject = yes
 smtpd_helo_required = yes
 smtp_helo_timeout = 60s
 smtp_destination_concurrency_limit = 2
 smtp_destination_rate_delay = 5s
 smtp_extra_recipient_limit = 10
+smtpd_client_connection_rate_limit = 10
+smtpd_error_sleep_time = 30s
 
 # ---------------------------------
 # Restrictions
