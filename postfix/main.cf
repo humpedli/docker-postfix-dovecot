@@ -101,12 +101,11 @@ smtpd_recipient_restrictions =
   reject_rbl_client b.barracudacentral.org,
   reject_rbl_client bl.spamcop.net,
   reject_rbl_client bl.blocklist.de,
-  reject_rbl_client rbl.megarbl.net,
   reject_rbl_client ubl.unsubscore.com,
   reject_rbl_client truncate.gbudb.net,
   reject_rbl_client bl.spameatingmonkey.net,
   reject_rbl_client backscatter.spameatingmonkey.net,
-  check_policy_service unix:private/spf,
+  check_policy_service unix:private/policyd-spf,
   permit
 
 submission_client_restrictions =
