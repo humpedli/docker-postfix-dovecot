@@ -100,7 +100,7 @@ smtpd_recipient_restrictions =
 #  reject_rbl_client zen.spamhaus.org,
   reject_rbl_client b.barracudacentral.org,
   reject_rbl_client bl.spamcop.net,
-  reject_rbl_client bl.blocklist.de,
+#  reject_rbl_client bl.blocklist.de,
   reject_rbl_client ubl.unsubscore.com,
   reject_rbl_client truncate.gbudb.net,
   reject_rbl_client bl.spameatingmonkey.net,
