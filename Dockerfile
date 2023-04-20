@@ -24,6 +24,7 @@ RUN chown -R vmail:vmail /home/vmail
 # copy dovecot and postfix configurations
 COPY dovecot /etc/dovecot
 COPY postfix /etc/postfix
+COPY postfix-policyd-spf-python /etc/postfix-policyd-spf-python
 
 # enable spamassassin
 RUN sed -i "s/ENABLED=0/ENABLED=1/g" /etc/default/spamassassin
